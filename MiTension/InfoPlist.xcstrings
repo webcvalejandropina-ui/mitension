@@ -1,0 +1,71 @@
+{
+  "sourceLanguage": "es",
+  "strings": {
+    "NSAlarmKitUsageDescription": {
+      "extractionState": "manual",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permite alarmas para los recordatorios de tensión que actives."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allow alarms for the blood pressure reminders you enable."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autorisez les alarmes pour les rappels de tension que vous activez."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erlauben Sie Alarme für die Blutdruck-Erinnerungen, die Sie aktivieren."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Consenti gli allarmi per i promemoria della pressione che attivi."
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permita alarmes para os lembretes de pressão que você ativar."
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permet alarmes per als recordatoris de tensió que activis."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "允许为您启用的血压提醒设置闹钟。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "有効にした血圧測定のリマインダーでアラームを使用することを許可します。"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اسمح بالمنبهات لتذكيرات ضغط الدم التي تفعّلها."
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

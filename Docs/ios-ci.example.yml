@@ -1,0 +1,63 @@
+# Template: copy to .github/workflows/ios.yml to enable GitHub Actions.
+name: iOS checks
+
+# Build and test only: no deployment or Apple credentials.
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'MiTensionIOS/**'
+      - 'MiTension/**'
+      - 'MiTensionTests/**'
+      - 'MiTension.xcodeproj/**'
+      - '.github/workflows/ios.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  simulator:
+    runs-on: macos-26
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Locate project and simulator
+        shell: bash
+        run: |
+          set -euo pipefail
+          xcodebuild -version
+          if [[ -d MiTensionIOS/MiTension.xcodeproj ]]; then
+            echo 'IOS_PROJECT=MiTensionIOS/MiTension.xcodeproj' >> "$GITHUB_ENV"
+          elif [[ -d MiTension.xcodeproj ]]; then
+            echo 'IOS_PROJECT=MiTension.xcodeproj' >> "$GITHUB_ENV"
+          else
+            echo 'MiTension.xcodeproj not found' >&2
+            exit 1
+          fi
+          # Pick an available iPhone, never an author-specific device ID.
+          simulator_id=$(xcrun simctl list devices available --json | python3 -c '
+          import json, re, sys
+          devices = json.load(sys.stdin)["devices"]
+          for runtime in sorted(devices, reverse=True):
+              match = re.search(r"iOS-(\d+)", runtime)
+              if not match or int(match.group(1)) < 26:
+                  continue
+              for device in devices[runtime]:
+                  if device.get("isAvailable") and device["name"].startswith("iPhone"):
+                      print(device["udid"])
+                      sys.exit(0)
+          sys.exit("No available iPhone simulator with iOS 26 or later")')
+          echo "IOS_SIMULATOR=$simulator_id" >> "$GITHUB_ENV"
+      - name: Build Release without signing
+        run: >-
+          xcodebuild -project "$IOS_PROJECT" -scheme MiTension
+          -configuration Release -destination 'generic/platform=iOS Simulator'
+          CODE_SIGNING_ALLOWED=NO COMPILER_INDEX_STORE_ENABLE=NO build
+      - name: Run isolated regression tests
+        run: >-
+          xcodebuild -project "$IOS_PROJECT" -scheme MiTension
+          -destination "platform=iOS Simulator,id=$IOS_SIMULATOR"
+          CODE_SIGNING_ALLOWED=NO COMPILER_INDEX_STORE_ENABLE=NO
+          -parallel-testing-enabled NO test
