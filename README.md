@@ -1,4 +1,29 @@
+![Mi Tensión — seguimiento de presión arterial para iOS](Docs/media/cover.svg)
+
 # Mi Tensión para iOS
+
+Tu seguimiento de tensión, en tu iPhone. Registra cada toma, consulta tu evolución y prepara un informe para tu próxima visita médica. **Sin cuentas, sin publicidad y con almacenamiento local.**
+
+[Preparación para App Store](AppStore/README.md) · [Pruebas y limitaciones](AppStore/release-review.md) · [Formato Excel](Design/formato-importacion.md)
+
+SwiftUI · iOS 17 o posterior · En desarrollo, sin publicación en App Store
+
+## Qué puedes hacer
+
+- Registrar una o tres tomas con pulso, notas y medicamentos asociados.
+- Consultar el histórico por día y mañana/noche, navegar horizontalmente y ver gráficas.
+- Compartir una vista médica en PDF, imprimir y exportar/importar Excel.
+- Configurar avisos y un segundo aviso a los 30 minutos si falta la toma.
+- Usar modo claro u oscuro y diez idiomas según el dispositivo.
+
+### Guía ilustrada
+
+<p align="center">
+  <img src="MiTension/Assets.xcassets/GuidePosture.imageset/GuidePosture.png" width="340" alt="Ilustración de la guía: postura para tomar la tensión" />
+  <img src="MiTension/Assets.xcassets/GuideCuff.imageset/GuideCuff.png" width="340" alt="Ilustración de la guía: colocación del manguito" />
+</p>
+
+Ilustraciones ampliables incluidas en la app; no son capturas de la interfaz. Las siguientes secciones documentan los requisitos, la privacidad y los límites de esta versión.
 
 Aplicación nativa SwiftUI para registrar lecturas de un tensiómetro, consultar tendencias y preparar informes por día, mañana y noche. El iPhone no mide la presión: se introducen las lecturas del aparato. Los datos se guardan en el dispositivo; se intercambian mediante Excel `.xlsx` y se imprimen mediante PDF, no mediante JSON.
 
